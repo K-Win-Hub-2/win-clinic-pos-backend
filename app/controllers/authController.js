@@ -121,8 +121,7 @@ exports.refreshToken = async (req, res) => {
     if (!refreshToken) {
       return res.status(401).send('Access Denied. No refresh token provided.');
     }
-    const decoded = jwt.verify(refreshToken,  CONFIG.jwtSecret,);
-    const accessToken = jwt.sign({ user: decoded.user },  CONFIG.jwtSecret, { expiresIn: '1d' });
+    const decoded = jwt.verify(refreshToken,  CONFIG.jwtSecret)
 
     res
       .cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'strict' })
